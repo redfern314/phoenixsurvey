@@ -1,8 +1,5 @@
-
-/*
- * GET home page.
- */
+// Main routes
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('home', { title: 'Express' });
 };

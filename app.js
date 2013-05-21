@@ -4,12 +4,16 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
 var app = express();
+var mongoose = require('mongoose');
+mongoose.connect((process.env.MONGOLAB_URI||'mongodb://localhost/phoenixsurvey'));
+
+var models = require('./models/models.js')
+  , survey = require('survey')
+  , index = require('index');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -29,8 +33,10 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', index.index);
+app.get('/account', index.account);
+app.get('/generate_form/:id', survey.generate);
+app.get('/survey/:id/:response', survey.submit);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
