@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var surveySchema = mongoose.Schema(
-    {id: String,
+    {
         owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
         textcolor: String,
         textsize: String
@@ -10,8 +10,8 @@ var surveySchema = mongoose.Schema(
 
 var userSchema = mongoose.Schema(
     {
-        id: String,
-        surveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Schema' }]
+        surveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Schema' }],
+        active: Boolean
     }
 );
 
