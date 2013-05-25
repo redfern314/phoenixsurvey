@@ -2,16 +2,18 @@ var mongoose = require('mongoose');
 
 var surveySchema = mongoose.Schema(
     {
-        owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-        textcolor: String,
-        textsize: String
+        owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        description: String,
+        dateCreated: Date,
+        dateExpire: Date,
+        active: Boolean,
+        responses: [{ text: String, votes: Number }]
       }
 );
 
 var userSchema = mongoose.Schema(
     {
-        surveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Schema' }],
-        active: Boolean
+        surveys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Schema' }]
     }
 );
 
